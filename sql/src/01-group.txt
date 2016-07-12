@@ -1,0 +1,39 @@
+1.查询每门课程成绩都大于等于60分学生的名字
+数据库 表 user
+id name subject score
+1	张三	语文	80
+2	张三	数学	60
+3	李四	语文	70
+4	王五	外语	90
+5	张三	外语	70
+6	李四	数学	59
+
+请找出每门课程都大于等于60分的那个人名字的SQL语句
+sql语句见/resource/01-user.sql
+查询语句：
+-----------------------------------
+select  name  from `user`
+group by name having min(score)>=60;
+
+解释：
+先通过group by语句将表以name进行分组，结果类似如下：
+	①张三   语文  80 
+			数学  60
+			外语  70
+	②李四   语文 	 70
+			数学  59
+	③王五	外语  90
+然后having+聚组函数进行过滤处理，查询score最小>=60分的。
+-----------------------------------
+其他实现方式:
+SQL1:
+select name from user
+group by name
+having count(score) =sum(case  when score>=60 then 1 else 0 end )
+
+SQL2:
+select name from user
+group by name
+having name not in (
+select name from user
+where score <60)
