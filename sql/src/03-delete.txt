@@ -1,0 +1,9 @@
+mysql的delete删除不能有别名
+比如：
+
+    delete from   users   u    where   u.id=1;
+这样就执行不成功。
+
+改成
+    delete   from users   where   id=1;
+即可。 
