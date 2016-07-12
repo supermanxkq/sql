@@ -40,6 +40,6 @@ where score <60)
 2.查询这个班总共有多少个人？
 	select count(DISTINCT name) from user;
 	解释：可以一同使用 DISTINCT 和 COUNT 关键词，来计算非重复结果的数目。
-3.计算每个人的平均分，总分
-select name,avg(score) avg,sum(score) sum from user  group by  name;
+3.计算每个人的平均分，总分（分类汇总）
+	select name,avg(score) avg,sum(score) sum from user  group by  name;
 4.注意：在select指定的字段要么就要包含在Group By语句的后面，作为分组的依据；要么就要被包含在聚合函数中。
